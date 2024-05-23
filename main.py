@@ -4,9 +4,9 @@ from sys import argv
 
 
 def tsv_to_json(tsv: str) -> Tuple[Dict[str, str | int]]:
-    return [{tsv.split("\n")[0].split("\t")[index]: int(word) if word.isdecimal() else word
+    return [{tsv.split("\n")[0].split("\t")[index]: float(word) if word.replace(".", "", 1).replace("-", "", 1).isdecimal() else word
              for index, word in enumerate(line.split("\t"))}
-            for line in tsv.split("\n")[2:]]
+            for line in tsv.split("\n")[1:]]
 
 
 def json_to_tsv(json: Tuple[Dict[str, str | int]]) -> Tuple[Tuple[str | int]]:
